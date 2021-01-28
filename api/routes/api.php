@@ -12,6 +12,8 @@ Route::post('movies', [MovieController::class, 'store']);
 
 Route::put('movies/{id}', [MovieController::class, 'update']);
 
+Route::delete('movies/{id}', [MovieController::class, 'delete']);
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
