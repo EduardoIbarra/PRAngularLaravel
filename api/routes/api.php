@@ -8,6 +8,8 @@ Route::get('movies', [MovieController::class, 'index']);
 
 Route::get('movies/{id}', [MovieController::class, 'show']);
 
+Route::post('movies', [MovieController::class, 'store']);
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
