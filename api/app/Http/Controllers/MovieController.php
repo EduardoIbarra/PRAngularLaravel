@@ -19,4 +19,11 @@ class MovieController extends Controller
         $movie = Movie::create($request->all());
         return response()->json($movie, 201);
     }
+
+    public function update(Request $request, $id) {
+        $movie = Movie::findOrFail($id);
+        $movie->update($request->all());
+
+        return response()->json($movie, 200);
+    }
 }
