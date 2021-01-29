@@ -1,0 +1,29 @@
+<br />
+<h1>Formulario de Película</h1>
+<button type="submit" class="btn btn-primary" [routerLink]="'/movies'">Regresar a Movies</button>
+<hr />
+<form [formGroup]="movieForm" (ngSubmit)="onSubmit(movieForm)">
+    <div class="form-group">
+        <label>Título</label>
+        <input class="form-control" 
+        [ngClass]="{'is-invalid': movieForm.get('title')?.hasError('required')}" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label>Año</label>
+        <input class="form-control"
+        [ngClass]="{'is-invalid': movieForm.get('year')?.hasError('required')}" formControlName="year" type="number">
+    </div>
+    <div class="form-group">
+        <label>Portada</label>
+        <input class="form-control"
+        [ngClass]="{'is-invalid': movieForm.get('cover')?.hasError('required')}" formControlName="cover">
+    </div>
+    <div class="form-group">
+        <label>Sinopsis</label>
+        <input class="form-control"
+        [ngClass]="{'is-invalid': movieForm.get('synopsis')?.hasError('required')}" formControlName="synopsis">
+    </div>
+  
+    <br />
+    <button type="submit" class="btn btn-primary" [disabled]="movieForm.invalid">Enviar</button>
+  </form>

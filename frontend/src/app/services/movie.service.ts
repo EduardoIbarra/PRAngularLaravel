@@ -23,4 +23,8 @@ export class MovieService {
   deleteMovieById = async (id: number): Promise<Object> => {
     return await this.httpClient.delete(`${this.url}movies/${id}`).toPromise() as Promise<Object>;
   }
+
+  createMovie = async (movie: Movie): Promise<Object> => {
+    return await this.httpClient.post(`${this.url}movies`, movie).toPromise();
+  }
 }

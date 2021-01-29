@@ -3,7 +3,7 @@
 <hr />
 <div class="row align-items-start" *ngIf="movie$ | async ; let movie">
     <div class="col-4">
-        <img class="img-fluid" src="https://i.pinimg.com/originals/44/31/bd/4431bd4cc9381ba8fe482e83367f3a49.jpg" alt="cover">
+        <img class="img-fluid" src="{{movie.cover}}" alt="cover">
     </div>
     <div class="col-8">
         <h1>{{movie.title}} ({{movie.year}})</h1>

@@ -6,17 +6,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieComponent } from './movie/movie.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MovieFormComponent } from './movie-form/movie-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    MovieComponent
+    MovieComponent,
+    MovieFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
