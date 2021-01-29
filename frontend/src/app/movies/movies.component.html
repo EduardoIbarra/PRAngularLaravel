@@ -4,13 +4,18 @@
         <th scope="col">#</th>
         <th scope="col">Título</th>
         <th scope="col">Año</th>
+        <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let movie of movies$ | async" [routerLink]="['/movie', movie.id]">
+    <tr *ngFor="let movie of movies$ | async">
         <th scope="row">{{movie.id}}</th>
         <td>{{movie.title}}</td>
         <td>{{movie.year}}</td>
+        <td class="text-center">
+            <i class="bi bi-eye text-primary" [routerLink]="['/movie', movie.id]"></i>
+            <i class="bi bi-trash text-danger" (click)="removeById(movie.id)"></i>
+        </td>
     </tr>
     </tbody>
 </table>
