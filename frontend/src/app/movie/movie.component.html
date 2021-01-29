@@ -1,1 +1,13 @@
-<button [routerLink]="'/movies'">Regresar a Movies</button>
+<br />
+<button [routerLink]="'/movies'" class="btn btn-primary">Regresar a Movies</button>
+<hr />
+<div class="row align-items-start" *ngIf="movie$ | async ; let movie">
+    <div class="col-4">
+        <img class="img-fluid" src="https://i.pinimg.com/originals/44/31/bd/4431bd4cc9381ba8fe482e83367f3a49.jpg" alt="cover">
+    </div>
+    <div class="col-8">
+        <h1>{{movie.title}} ({{movie.year}})</h1>
+        <h2>Sinopsis:</h2>
+        <p>{{movie.synopsis}}</p>
+    </div>
+</div>

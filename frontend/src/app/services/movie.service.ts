@@ -15,4 +15,8 @@ export class MovieService {
   getAllMovies = async (): Promise<Movie[]> => {
     return await this.httpClient.get(`${this.url}movies`).toPromise() as Promise<Movie[]>;
   }
+
+  getMovieById = async (id: number): Promise<Movie> => {
+    return await this.httpClient.get(`${this.url}movies/${id}`).toPromise() as Promise<Movie>;
+  }
 }

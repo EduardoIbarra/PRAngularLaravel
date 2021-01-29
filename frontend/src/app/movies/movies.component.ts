@@ -8,14 +8,13 @@ import { Movie } from '../models/Movie';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  public movies: Promise<Movie[]> | undefined;
+  public movies$: Promise<Movie[]> | undefined;
   constructor(
     private movieService: MovieService,
   ) { }
 
   ngOnInit(): void {
-    this.movies = this.movieService.getAllMovies();
-    console.log(this.movies);
+    this.movies$ = this.movieService.getAllMovies();
   }
 
 }
