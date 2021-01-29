@@ -27,4 +27,8 @@ export class MovieService {
   createMovie = async (movie: Movie): Promise<Object> => {
     return await this.httpClient.post(`${this.url}movies`, movie).toPromise();
   }
+
+  updateMovie = async (id: string | number | null, movie: Movie): Promise<Object> => {
+    return await this.httpClient.put(`${this.url}movies/${id}`, movie).toPromise();
+  }
 }

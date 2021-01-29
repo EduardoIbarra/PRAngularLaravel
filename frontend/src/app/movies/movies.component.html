@@ -18,6 +18,7 @@
         <td>{{movie.year}}</td>
         <td class="text-center">
             <i class="bi bi-eye text-primary" [routerLink]="['/movie', movie.id]"></i>
+            <i class="bi bi-pencil text-primary" [routerLink]="['/movie-form', movie.id]"></i>
             <i class="bi bi-trash text-danger" (click)="removeById(movie.id)"></i>
         </td>
     </tr>

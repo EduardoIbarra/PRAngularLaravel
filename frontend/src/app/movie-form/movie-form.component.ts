@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../services/movie.service';
+import { Movie } from '../models/Movie';
 
 @Component({
   selector: 'app-movie-form',
@@ -10,10 +11,14 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieFormComponent implements OnInit {
   public movieForm: FormGroup;
+  public movie$: Promise<Movie> | undefined;
+  public editing: boolean = false;
+  private routeParamId: string | number | null = 0;
   constructor(
     private formBuilder: FormBuilder,
     private movieService: MovieService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.movieForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -25,6 +30,7 @@ export class MovieFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getMovie();
   }
 
   onSubmit(form: FormGroup) {
@@ -34,7 +40,10 @@ export class MovieFormComponent implements OnInit {
     console.log('Email', form.value.year);
     console.log('Cover', form.value.cover);
     console.log('Synopsis', form.value.synopsis);
-    this.movieService.createMovie(form.value).then(res => {
+    const call = (this.editing) 
+      ? this.movieService.updateMovie(this.routeParamId, form.value) 
+      : this.movieService.createMovie(form.value);
+    call.then(res => {
       console.log(res);
       alert('Guardado con éxito!');
       this.router.navigateByUrl('/movies');
@@ -42,6 +51,30 @@ export class MovieFormComponent implements OnInit {
       alert('An error has happened');
       console.log(err);
     });
+  }
+
+  getMovie = async() => {
+    this.routeParamId = this.activatedRoute.snapshot!.paramMap.get('id');
+    if (this.routeParamId) {
+      this.routeParamId = parseInt(this.routeParamId);
+      if (this.routeParamId === 0) {
+        this.editing = false;
+        return;
+      }
+      this.editing = true;
+      this.movieService.getMovieById(this.routeParamId).then(res => {
+        this.movieForm.setValue({
+          title: res.title,
+          synopsis: res.synopsis,
+          year: res.year,
+          cover: res.cover,
+        });
+        console.log(res);
+      }).catch(err => {
+        alert('An error has happened');
+        console.log(err);
+      });
+    }
   }
 
 }
